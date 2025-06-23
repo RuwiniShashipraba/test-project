@@ -1,0 +1,29 @@
+import { Page, Locator } from '@playwright/test';
+
+export class ProductPage {
+  readonly page: Page;
+  readonly relatedProductCards: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.relatedProductCards = page.locator('.related-product-card');
+  }
+
+  async navigateToProduct(productId: string) {
+    await this.page.goto(`https:/ebay.com/product/${productId}`);
+  }
+
+  async getRelatedProductCount() {
+    return this.relatedProductCards.count();
+  }
+
+  async getCardDetails(index: number) {
+    const card = this.relatedProductCards.nth(index);
+    return {
+      imageVisible: await card.locator('img').isVisible(),
+      title: await card.locator('.product-title').textContent(),
+      price: await card.locator('.product-price').textContent(),
+      ratingVisible: await card.locator('.star-rating').isVisible()
+    };
+  }
+}
