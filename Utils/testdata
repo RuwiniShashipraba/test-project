@@ -1,0 +1,5 @@
+export const testData = [
+  { productId: 'WALLET_PROD_001', expectedCount: 6 },
+  { productId: 'WALLET_PROD_003', expectedCount: 3 },
+  { productId: 'WALLET_PROD_004', expectedCount: 0 }
+];
